@@ -1,0 +1,29 @@
+{
+    "name": "vendor/laasti",
+    "description": "Description of project Laasti.",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Sonia",
+            "email": "your@email.here"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/nebulousGirl/route"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"Laasti\\": "src/laasti/"}
+    },
+    "require": {
+        "league/container": "~1.3.0",
+        "symfony/http-foundation": "~2.6",
+        "league/route": "master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.5.*",
+        "squizlabs/php_codesniffer": "dev-master"
+    }
+}
