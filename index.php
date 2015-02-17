@@ -10,6 +10,10 @@ $router = new League\Route\RouteCollection($container);
 
 $app = new Laasti\Application($container, $stack, $router);
 
+$app->container->addServiceProvider('Laasti\Providers\WhoopsProvider');
+
+$app->container->get('Whoops\Run');
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
