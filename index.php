@@ -13,17 +13,11 @@ $app = new Laasti\Application($container, $stack, $router);
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-$url = new League\Route\UrlGenerator($app->router);
+//$url = new League\Route\UrlGenerator($app->router);
+//$url->generate('@hello');
 
-$app->router->addRoute('GET', '/acme', function (Request $request, Response $response) { return $response;});
-$app->router->addRoute('GET', '@myroute2/acme/{uri}/{id:number}/{name:word}', function (Request $request, Response $response) { return $response;});
-$app->router->addRoute('GET', '@myroute/acme/route', function (Request $request, Response $response) {    
-    // do something clever
-    $response->setContent('Hello world') ;
-    return $response;
-});
+$app->router->addRoute('GET', '/', 'Laasti\\Controllers\\HelloWorld::output');
+$app->router->addRoute('GET', '@hello/hello/{name:word}', 'Laasti\\Controllers\\HelloWorld::hello');
 
-$url->generate('myroute');
-$url->generate('myroute2', array('id' => 1, 'name' => 'mmamama', 'uri' => 'iusgdif ciubs dsuhb'));
 
 $app->run();
