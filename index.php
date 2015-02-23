@@ -26,8 +26,10 @@ $app->addMiddleware('Laasti\Middleware\Routing', $app);
 //$url = new League\Route\UrlGenerator($app->router);
 //$url->generate('@hello');
 //TODO: have a way to define routes in services
-$app->getRouter()->addRoute('GET', '/', 'Laasti\\Controllers\\HelloWorld::output');
-$app->getRouter()->addRoute('GET', '@hello/hello/{name:word}', 'Laasti\\Controllers\\HelloWorld::hello');
+//MethodArgumentStrategy As POPO
+$strategy = new League\Route\Strategy\UriStrategy();
+$app->getRouter()->addRoute('GET', '/', 'Laasti\\Controllers\\HelloWorld::output', $strategy);
+$app->getRouter()->addRoute('GET', '@hello/hello/{name:word}', 'Laasti\\Controllers\\HelloWorld::hello', $strategy);
 
 
 $app->run();

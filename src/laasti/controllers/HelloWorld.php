@@ -18,19 +18,20 @@ use Symfony\Component\HttpFoundation\Response;
 class HelloWorld
 {
 
-    public function output(Request $request, Response $response)
+    public function output()
     {
-        
+        $response = new Response();
         $response->setContent('Hello world!');
         
         return $response;
     }
     
-    public function hello(Request $request, Response $response, $params = array())
+    public function hello($name)
     {   
         //TODO: Would prefer for the params to be in the request
         
-        $response->setContent(sprintf('Hello %s!', $params['name']));
+        $response = new Response();
+        $response->setContent(sprintf('Hello %s!', $name));
         
         return $response;
     }
