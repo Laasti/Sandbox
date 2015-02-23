@@ -9,8 +9,6 @@
 namespace Laasti\Providers;
 
 use League\Container\ServiceProvider;
-use Whoops\Handler\PrettyPageHandler;
-use Whoops\Handler\JsonResponseHandler;
 
 /**
  * Description of WhoopsProvider
@@ -22,27 +20,22 @@ class WhoopsProvider extends ServiceProvider
 
     protected $provides = [
         'Whoops\Run',
+        'Whoops\Handler\HandlerInterface'
     ];
 
     public function register()
     {
-
-        $this->getContainer()->add('Whoops\Run', function() {
-
+        $c = $this->getContainer();
+        
+        //Default error handler
+        if (!$c->isRegistered('Whoops\Handler\HandlerInterface')) {
+            $c->add('Whoops\Handler\HandlerInterface', 'Whoops\Handler\PrettyPageHandler');
+        }
+        
+        $c->add('Whoops\Run', function() use ($c) {
             $run = new \Whoops\Run;
-            $handler = new PrettyPageHandler;
-            $handler->setPageTitle("Whoops! There was a problem.");
-            /*
-              $handler->addDataTable('Killer App Details', array(
-              "Important Data" => $myApp->getImportantData(),
-              "Thingamajig-id" => $someId
-              ));
-             */
+            $handler = $c->get('Whoops\Handler\HandlerInterface');
             $run->pushHandler($handler);
-
-            //For AJAX request
-            //$run->pushHandler(new JsonResponseHandler);
-
             $run->register();
             return $run;
         });

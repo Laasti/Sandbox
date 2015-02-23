@@ -31,6 +31,10 @@ class Environment implements HttpKernelInterface
 
     public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)
     {
+        //TODO: Register environments to the environment manager
+        //Environments must implement Environment interface
+        //Environment must declare services: email connection, dbconnections, logging handler, error handler
+        //The services are initialized here
         $this->container->get('Whoops\Run');
 
         //TODO: Make a class per environment with properties for the configuration, use the request to resolve the environment

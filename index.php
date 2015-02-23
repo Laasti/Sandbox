@@ -7,6 +7,13 @@ $app = new Laasti\Application();
 
 $app->addServiceProvider('Laasti\Providers\WhoopsProvider');
 
+$app->add('Whoops\Handler\HandlerInterface', function() {
+    $handler = new Whoops\Handler\PrettyPageHandler;
+    $handler->setPageTitle("Whoops! There was a problem.");
+
+    return $handler;
+});
+
 $app->addMiddleware('Laasti\Middleware\Environment', $app);
 $app->addMiddleware('Laasti\Middleware\Routing', $app);
 
