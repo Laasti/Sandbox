@@ -2,6 +2,7 @@
 
 namespace Laasti;
 
+//TODO: provide my own interfaces as I don't use anything else from the HTTP Kernel package
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\TerminableInterface;
 use Symfony\Component\HttpFoundation\Request;

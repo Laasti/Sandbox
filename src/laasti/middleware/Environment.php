@@ -36,6 +36,7 @@ class Environment implements HttpKernelInterface
         //Environment must declare services: email connection, dbconnections, logging handler, error handler
         //The services are initialized here
         $this->container->get('Whoops\Run');
+        $logger = $this->container->get('Psr\Log\LoggerInterface');
 
         //TODO: Make a class per environment with properties for the configuration, use the request to resolve the environment
         return $this->app->handle($request, $type, $catch);

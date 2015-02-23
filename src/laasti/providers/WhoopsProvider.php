@@ -31,14 +31,14 @@ class WhoopsProvider extends ServiceProvider
         if (!$c->isRegistered('Whoops\Handler\HandlerInterface')) {
             $c->add('Whoops\Handler\HandlerInterface', 'Whoops\Handler\PrettyPageHandler');
         }
-        
+        //TODO: Should provide an interface instead so we can swap if we need to
         $c->add('Whoops\Run', function() use ($c) {
             $run = new \Whoops\Run;
             $handler = $c->get('Whoops\Handler\HandlerInterface');
             $run->pushHandler($handler);
             $run->register();
             return $run;
-        });
+        }, true);
     }
 
 }

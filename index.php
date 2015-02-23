@@ -6,6 +6,7 @@ require 'vendor/autoload.php';
 $app = new Laasti\Application();
 
 $app->addServiceProvider('Laasti\Providers\WhoopsProvider');
+$app->addServiceProvider('Laasti\Providers\MonologProvider');
 
 $app->add('Whoops\Handler\HandlerInterface', function() {
     $handler = new Whoops\Handler\PrettyPageHandler;
