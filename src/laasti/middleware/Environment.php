@@ -17,13 +17,13 @@ use League\Container\ContainerInterface;
  *
  * @author Sonia
  */
-class Routing implements HttpKernelInterface
+class Environment implements HttpKernelInterface
 {
 
     private $app;
     private $container;
 
-    public function __construct(HttpKernelInterface $app, ContainerInterface $container)
+    public function __construct(HttpKernelInterface $app, ContainerInterface $container = null)
     {
         $this->app = $app;
         $this->container = $container;
@@ -31,13 +31,10 @@ class Routing implements HttpKernelInterface
 
     public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)
     {
+        $this->container->get('Whoops\Run');
 
-        //TODO maybe better to get router directly, but would have to make it a singleton, maybe use an alias
-        $dispatcher = $this->container->getRouter()->getDispatcher();
-
-        $response = $dispatcher->dispatch($request->getMethod(), $request->getPathInfo());
-
-        return $response;
+        //TODO: Make a class per environment with properties for the configuration, use the request to resolve the environment
+        return $this->app->handle($request, $type, $catch);
     }
 
 }

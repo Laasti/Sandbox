@@ -19,29 +19,33 @@ use Whoops\Handler\JsonResponseHandler;
  */
 class WhoopsProvider extends ServiceProvider
 {
+
     protected $provides = [
         'Whoops\Run',
     ];
-    
+
     public function register()
     {
-        //Need to register else the container freaks out
-        //TODO: Use a class
-        $this->getContainer()->add('Whoops\Run');
-        $run     = new \Whoops\Run;
-        $handler = new PrettyPageHandler;
-        $handler->setPageTitle("Whoops! There was a problem.");
-        /*
-        $handler->addDataTable('Killer App Details', array(
-            "Important Data" => $myApp->getImportantData(),
-            "Thingamajig-id" => $someId
-        ));
-        */
-        $run->pushHandler($handler);
-        
-        //For AJAX request
-        //$run->pushHandler(new JsonResponseHandler);
-        
-        $run->register();
+
+        $this->getContainer()->add('Whoops\Run', function() {
+
+            $run = new \Whoops\Run;
+            $handler = new PrettyPageHandler;
+            $handler->setPageTitle("Whoops! There was a problem.");
+            /*
+              $handler->addDataTable('Killer App Details', array(
+              "Important Data" => $myApp->getImportantData(),
+              "Thingamajig-id" => $someId
+              ));
+             */
+            $run->pushHandler($handler);
+
+            //For AJAX request
+            //$run->pushHandler(new JsonResponseHandler);
+
+            $run->register();
+            return $run;
+        });
     }
+
 }
