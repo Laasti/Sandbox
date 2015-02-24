@@ -15,14 +15,18 @@ class Application extends \League\Container\Container implements HttpKernelInter
     protected $middlewares = array();
     protected $middlewareInstances = array();
 
-    public function __construct($config = [])
+    public function __construct($config = [], $factory = null)
     {
-        parent::__construct($config);
+       // parent::__construct($config);
 
+        $this->factory = (is_null($factory)) ? new \League\Container\Definition\Factory : $factory;
+        
         //Make sure the app is the container, and only one exists
         $this->add('League\Container\ContainerInterface', $this, true);
         $this->add('League\Container\Container', $this, true);
-        $this->add('League\Route\RouteCollection');
+        $this->add('League\Route\RouteCollection')->withArgument($this);
+        
+        $this->addItemsFromConfig($config);
     }
 
     public function getRouter()

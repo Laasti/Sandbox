@@ -17,19 +17,29 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class HelloWorld
 {
+    
+    /**
+     *
+     * @var \Laasti\TwigRenderer
+     */
+    protected $renderer = null;
+
+    //TODO Use an interface to swap renderer if needed
+    public function __construct(\Laasti\TwigRenderer $renderer)
+    {
+        $this->renderer = $renderer;
+    }
 
     public function output()
     {
         $response = new Response();
-        $response->setContent('Hello world!');
+        $response->setContent($this->renderer->render('hello.html.twig'));
         
         return $response;
     }
     
     public function hello($name)
-    {   
-        //TODO: Would prefer for the params to be in the request
-        
+    {           
         $response = new Response();
         $response->setContent(sprintf('Hello %s!', $name));
         

@@ -7,6 +7,7 @@ $app = new Laasti\Application();
 
 $app->addServiceProvider('Laasti\Providers\WhoopsProvider');
 $app->addServiceProvider('Laasti\Providers\MonologProvider');
+$app->addServiceProvider('Laasti\Providers\TwigProvider');
 
 $app->add('Whoops\Handler\HandlerInterface', function() {
     $handler = new Whoops\Handler\PrettyPageHandler;
@@ -29,6 +30,11 @@ $app->addMiddleware('Laasti\Middleware\Routing', $app);
 //MethodArgumentStrategy As POPO
 $strategy = new League\Route\Strategy\UriStrategy();
 $app->getRouter()->addRoute('GET', '/', 'Laasti\\Controllers\\HelloWorld::output', $strategy);
+/*$app->getRouter()->addRoute('GET', '/', function() use ($app) {
+
+    $app->get('Laasti\TwigRenderer');
+    return 'Test';
+}, $strategy);*/
 $app->getRouter()->addRoute('GET', '@hello/hello/{name:word}', 'Laasti\\Controllers\\HelloWorld::hello', $strategy);
 
 
