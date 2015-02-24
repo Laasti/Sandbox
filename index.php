@@ -16,6 +16,9 @@ $app->add('Whoops\Handler\HandlerInterface', function() {
     return $handler;
 });
 
+//TODO: Move to some configuration file, maybe?
+$app['template_path'] = __DIR__.'/resources/views';
+
 $app->addMiddleware('Laasti\Middleware\Environment', $app);
 $app->addMiddleware('Laasti\Middleware\Routing', $app);
 

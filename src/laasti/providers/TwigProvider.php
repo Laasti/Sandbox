@@ -27,11 +27,15 @@ class TwigProvider extends ServiceProvider
     {
         $c = $this->getContainer();
         if (!$c->isRegistered('Twig_LoaderInterface')) {
-            $c->add('Twig_LoaderInterface', function() {
+            
+            //TODO: instead of an arbitrary default, implement some way to require configuration
+            $c['template_path'] = $c['template_path'] ?: __DIR__.'/../../../resources/views';
+            
+            $c->add('Twig_LoaderInterface', function() use ($c) {
                 //TODO: Have a way to set configurations
                 //Maybe use the Environment service, to request a configuration?
                 //Environment->get('templates_folder')
-                $loader = new \Twig_Loader_Filesystem(__DIR__.'/../../../resources/views');
+                $loader = new \Twig_Loader_Filesystem($c['template_path']);
                 return $loader;
             });
         }
