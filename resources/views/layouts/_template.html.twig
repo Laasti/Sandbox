@@ -1,0 +1,40 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        {% block title_tag %}
+        <title>{{ title_tag|default(page_title|trans ~ ' | ' ~ 'site_title'|trans) }}</title>
+        {% endblock %}
+        {% block viewport %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% endblock %}
+        {% block meta %}
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+        {% endblock %}
+
+        {% block css %}
+        <link rel="stylesheet" href="{{ theme_path }}css/foundation.css" />
+        {% endblock %}
+        {% block js %}
+        <script src="{{ theme_path }}js/vendor/modernizr.js"></script>
+        {% endblock %}
+        {% block head_end %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body_start %}
+        {% endblock %}
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        {% block body %} 
+        {% endblock %}
+        
+        {% block body_end %}
+        {% endblock %}
+    </body>
+</html>

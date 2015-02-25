@@ -25,15 +25,20 @@ class HelloWorld
     protected $renderer = null;
 
     //TODO Use an interface to swap renderer if needed
-    public function __construct(\Laasti\TwigRenderer $renderer)
+    public function __construct(\Laasti\Services\RendererInterface $renderer, \Spot\Locator $orm)
     {
         $this->renderer = $renderer;
+        $this->orm = $orm;
+        $this->repo = $this->orm->mapper('Laasti\Entities\Members');
     }
 
     public function output()
     {
         $response = new Response();
+      
+        $this->renderer->setVars(array('members' => $this->repo->all(), 'me' => 'Test'));
         $response->setContent($this->renderer->render('hello.html.twig'));
+        //$response->setContent('Test');
         
         return $response;
     }

@@ -12,6 +12,34 @@
         {
             "type": "vcs",
             "url": "https://github.com/nebulousGirl/route"
+        },
+        {
+            "type": "vcs",
+            "url": "C:/wamp/www/laasti/translation"
+        },
+        {
+            "type": "vcs",
+            "url": "C:/wamp/www/laasti/application"
+        },
+        {
+            "type": "vcs",
+            "url": "C:/wamp/www/laasti/stack"
+        },
+        {
+            "type": "vcs",
+            "url": "C:/wamp/www/laasti/route"
+        },
+        {
+            "type": "vcs",
+            "url": "C:/wamp/www/laasti/environment"
+        },
+        {
+            "type": "vcs",
+            "url": "C:/wamp/www/laasti/renderer"
+        },
+        {
+            "type": "vcs",
+            "url": "C:/wamp/www/laasti/profiler"
         }
     ],
     "autoload": {
@@ -20,15 +48,16 @@
         }
     },
     "require": {
-        "league/container": "~1.3.0",
-        "symfony/http-foundation": "~2.6",
-        "symfony/http-kernel": "~2.6",
-        "symfony/translation": "~2.6",
-        "symfony/stopwatch": "~2.6",
-        "league/route": "master",
+        "laasti/translation": "master",
+        "laasti/application": "master",
+        "laasti/stack": "master",
+        "laasti/profiler": "master",
+        "laasti/route": "master",
+        "laasti/renderer": "master",
+        "laasti/environment": "master",
         "filp/whoops": "~1.1.3",
         "monolog/monolog": "~1.12",
-        "twig/twig": "~1.0"
+        "vlucas/spot2": "~2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "4.5.*",
