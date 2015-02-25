@@ -16,6 +16,7 @@ $app->addServiceProvider('Laasti\Providers\WhoopsProvider');
 $app->addServiceProvider('Laasti\Providers\MonologProvider');
 $app->addServiceProvider('Laasti\Providers\TwigProvider');
 $app->addServiceProvider('Laasti\Providers\TranslationProvider');
+$app->addServiceProvider('Laasti\Providers\SpotProvider');
 
 $app->add('Whoops\Handler\HandlerInterface', function() {
     $handler = new Whoops\Handler\PrettyPageHandler;

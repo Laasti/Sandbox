@@ -25,9 +25,12 @@ class HelloWorld
     protected $renderer = null;
 
     //TODO Use an interface to swap renderer if needed
-    public function __construct(\Laasti\TwigRenderer $renderer)
+    public function __construct(\Laasti\TwigRenderer $renderer, \Spot\Locator $orm)
     {
         $this->renderer = $renderer;
+        /*$this->orm = $orm;
+        $this->repo = $this->orm->mapper('Laasti\Entities\Pages');
+        var_dump($this->repo->get(800));*/
     }
 
     public function output()
