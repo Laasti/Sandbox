@@ -7,20 +7,22 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\TerminableInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class Application extends \League\Container\Container implements HttpKernelInterface, TerminableInterface
 {
 
     protected $router;
+    protected $profiler;
     protected $middlewares = array();
     protected $middlewareInstances = array();
 
-    public function __construct($config = [], $factory = null)
+    public function __construct(Stopwatch $profiler, $config = [], $factory = null)
     {
        // parent::__construct($config);
 
         $this->factory = (is_null($factory)) ? new \League\Container\Definition\Factory : $factory;
-        
+        $this->profiler = $profiler;
         //Make sure the app is the container, and only one exists
         $this->add('League\Container\ContainerInterface', $this, true);
         $this->add('League\Container\Container', $this, true);
@@ -45,18 +47,26 @@ class Application extends \League\Container\Container implements HttpKernelInter
      */
     public function run(Request $request = null)
     {
+        $this->profiler->openSection();
         if (null === $request) {
             $request_obj = $this->get('Symfony\Component\HttpFoundation\Request');
             $request = $request_obj::createFromGlobals();
         }
-
+        $this->profiler->start('middlewares_init');
         $this->initMiddlewares();
+        $this->profiler->stop('middlewares_init');
 
+        $this->profiler->start('handle_request');
+        //TODO: Change awkward looping process for a middleware class
         $first = $this->middlewareInstances[0];
         $response = $first->handle($request);
         $response->send();
+        $this->profiler->stop('handle_request');
 
+        $this->profiler->start('terminate_request');
         $this->terminate($request, $response);
+        $this->profiler->stop('terminate_request');
+        $this->profiler->stopSection('Laasti\\Application::run');
     }
 
     public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)
