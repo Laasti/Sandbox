@@ -18,7 +18,7 @@ class DevEnvironment implements \Laasti\Environment\EnvironmentInterface
 
     protected $container;
 
-    public function __construct(\Laasti\Application $container)
+    public function __construct(\League\Container\Container $container)
     {
         $this->container = $container;
     }

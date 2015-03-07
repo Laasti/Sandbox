@@ -3,26 +3,31 @@
 // include the Composer autoloader
 require 'vendor/autoload.php';
 
-$app = new Laasti\Application();
+$di = new League\Container\Container();
+$di->add('League\Container\ContainerInterface', $di, true);
+$di->add('League\Container\Container', $di, true);
+$stack = new Laasti\Stack\Stack;
+$route = new \Laasti\Route\RouteCollection($di);
 
 //$app->addServiceProvider('Laasti\Providers\WhoopsProvider');
-$app->addServiceProvider('Laasti\Providers\MonologProvider');
-$app->addServiceProvider('Laasti\Renderer\TwigServiceProvider');
-$app->addServiceProvider('Laasti\Translation\TranslationServiceProvider');
-$app->addServiceProvider('Laasti\Providers\SpotProvider');
+$di->addServiceProvider('Laasti\Providers\MonologProvider');
+$di->addServiceProvider('Laasti\Renderer\TwigServiceProvider');
+$di->addServiceProvider('Laasti\Translation\TranslationServiceProvider');
+$di->addServiceProvider('Laasti\Providers\SpotProvider');
 
-$app->add('Laasti\DevEnvironment')->withArgument($app);
-$app->add('Laasti\Services\RouteCollectionInterface', 'Laasti\Route\RouteCollection', true)->withArgument($app);
-$app->add('Laasti\Services\StackInterface', 'Laasti\Stack\Stack', true);
+$di->add('Laasti\DevEnvironment')->withArgument($di);
+$di->add('Laasti\Services\RouteCollectionInterface', 'Laasti\Route\RouteCollection', true)->withArgument($di);
+$di->add('Laasti\Services\StackInterface', $stack, true);
+$di->add('Laasti\Stack\Stack', $stack, true);
 
 //TODO: Move to some configuration file, maybe?
-$app['template_path'] = __DIR__ . '/resources/views';
-$app['twig_cache'] = __DIR__ . '/cache/twig';
+$di['template_path'] = __DIR__ . '/resources/views';
+//$di['twig_cache'] = __DIR__ . '/cache/twig';
 
 $env = new Laasti\Environment\EnvironmentChooser;
-$env->addEnvironment($app->get('Laasti\DevEnvironment'));
-$app->getStack()->push($env);
-$app->getStack()->push(new Laasti\Route\Middleware\Routing, $app->getRoutes());
+$env->addEnvironment($di->get('Laasti\DevEnvironment'));
+$stack->push($env);
+$stack->push(new Laasti\Route\Middleware\Routing, $route);
 
 /*
 
@@ -34,12 +39,19 @@ $app->getStack()->push(new Laasti\Route\Middleware\Routing, $app->getRoutes());
 //TODO: have a way to define routes in services
 //MethodArgumentStrategy As POPO
 $strategy = new League\Route\Strategy\UriStrategy();
-$app->getRoutes()->addRoute('GET', '/', 'Laasti\\Controllers\\HelloWorld::output', $strategy);
+$route->setStrategy($strategy);
+$route->addRoute('GET', '/', 'Laasti\\Controllers\\HelloWorld::output');
 /* $app->getRouter()->addRoute('GET', '/', function() use ($app) {
 
   $app->get('Laasti\TwigRenderer');
   return 'Test';
   }, $strategy); */
-$app->getRoutes()->addRoute('GET', '@hello/hello/{name:word}', 'Laasti\\Controllers\\HelloWorld::hello', $strategy);
+$route->addRoute('GET', '@hello/hello/{name:word}', 'Laasti\\Controllers\\HelloWorld::hello');
 
-$app->run();
+$request_obj = $di->get('Symfony\Component\HttpFoundation\Request');
+$request = $request_obj::createFromGlobals();
+
+$response = $stack->execute($request);
+$response->send();
+
+$stack->close($request, $response);

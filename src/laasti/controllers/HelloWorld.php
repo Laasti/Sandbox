@@ -36,7 +36,7 @@ class HelloWorld
     {
         $response = new Response();
       
-        $this->renderer->setVars(array('members' => $this->repo->all(), 'me' => 'Test'));
+        $this->renderer->setVars(array('members' => array(), 'me' => 'Test'));
         $response->setContent($this->renderer->render('hello.html.twig'));
         //$response->setContent('Test');
         
