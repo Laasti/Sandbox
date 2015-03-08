@@ -7,7 +7,7 @@
  */
 
 namespace Laasti\Controllers;
-use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -25,20 +25,16 @@ class HelloWorld
     protected $renderer = null;
 
     //TODO Use an interface to swap renderer if needed
-    public function __construct(\Laasti\Services\RendererInterface $renderer, \Spot\Locator $orm)
+    public function __construct(\Twig_Environment $renderer)
     {
         $this->renderer = $renderer;
-        $this->orm = $orm;
-        $this->repo = $this->orm->mapper('Laasti\Entities\Members');
     }
 
     public function output()
     {
         $response = new Response();
       
-        $this->renderer->setVars(array('members' => array(), 'me' => 'Test'));
-        $response->setContent($this->renderer->render('hello.html.twig'));
-        //$response->setContent('Test');
+        $response->setContent($this->renderer->render('hello.html.twig', array('members' => array(), 'me' => 'Test')));
         
         return $response;
     }

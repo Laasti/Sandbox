@@ -8,27 +8,31 @@
 
 namespace Laasti;
 
+use Laasti\Environment\EnvironmentInterface;
+use League\Container\Container;
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * Description of DevEnvironment
  *
  * @author Sonia
  */
-class DevEnvironment implements \Laasti\Environment\EnvironmentInterface
+class DevEnvironment implements EnvironmentInterface
 {
 
     protected $container;
 
-    public function __construct(\League\Container\Container $container)
+    public function __construct(Container $container)
     {
         $this->container = $container;
     }
 
-    public function validate(\Symfony\Component\HttpFoundation\Request $request)
+    public function validate(Request $request)
     {
         return true;
     }
 
-    public function configure(\Symfony\Component\HttpFoundation\Request $request)
+    public function configure(Request $request)
     {
         //TODO: Register environments to the environment manager
         //Environments must implement Environment interface
@@ -37,14 +41,9 @@ class DevEnvironment implements \Laasti\Environment\EnvironmentInterface
 
         $this->container['db.driver'] = 'mysql';
         $this->container['db.dsn'] = 'mysql://root:@localhost/anqintranet';
-
-        $this->container->add('Whoops\Handler\HandlerInterface', function() {
-            $handler = new Whoops\Handler\PrettyPageHandler;
-            $handler->setPageTitle("Whoops! There was a problem.");
-
-            return $handler;
-        });
-        $this->container->get('Whoops\Run');
-        $logger = $this->container->get('Psr\Log\LoggerInterface');
+        $this->container['locales.current'] = 'fr';
+        $this->container['locales.fallbacks'] = array('fr');
+        
+        //$logger = $this->container->get('Psr\Log\LoggerInterface');
     }
 }

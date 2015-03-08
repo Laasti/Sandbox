@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         {% block title_tag %}
-        <title>{{ title_tag|default(page_title|trans ~ ' | ' ~ 'site_title'|trans) }}</title>
+        <title>{{ title_tag|default(page_title ~ ' | ' ~ 'site_title') }}</title>
         {% endblock %}
         {% block viewport %}
         <meta name="viewport" content="width=device-width, initial-scale=1">
