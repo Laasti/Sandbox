@@ -18,23 +18,12 @@ use Symfony\Component\HttpFoundation\Response;
 class HelloWorld
 {
     
-    /**
-     *
-     * @var \Laasti\TwigRenderer
-     */
-    protected $renderer = null;
-
-    //TODO Use an interface to swap renderer if needed
-    public function __construct(\Twig_Environment $renderer)
-    {
-        $this->renderer = $renderer;
-    }
 
     public function output()
     {
         $response = new Response();
       
-        $response->setContent($this->renderer->render('hello.html.twig', array('members' => array(), 'me' => 'Test')));
+        $response->setContent('Hello World!');
         
         return $response;
     }
