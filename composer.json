@@ -11,6 +11,10 @@
     "repositories": [
         {
             "type": "vcs",
+            "url": "https://github.com/Laasti/application"
+        },
+        {
+            "type": "vcs",
             "url": "C:/wamp/www/laasti/stack"
         },
         {
@@ -24,10 +28,7 @@
         }
     },
     "require": {
-        "league/container": "~1.3",
-        "laasti/stack": "dev-master",
-        "laasti/route": "dev-develop",
-        "symfony/http-foundation" : "~2.7"
+        "laasti/application": "dev-develop"
     },
     "suggest": {
         "vlucas/spot2": "A nice ORM that let's you code."
