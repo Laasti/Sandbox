@@ -12,14 +12,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/Laasti/application"
-        },
-        {
-            "type": "vcs",
-            "url": "C:/wamp/www/laasti/stack"
-        },
-        {
-            "type": "vcs",
-            "url": "C:/wamp/www/laasti/route"
         }
     ],
     "autoload": {
@@ -28,6 +20,12 @@
         }
     },
     "require": {
+        "monolog/monolog": "~1.13",
+        "league/flysystem": "~1.0",
+        "vlucas/spot2": "~2.1",
+        "gregwar/image": "2.*",
+         "vlucas/valitron": "~1.1",
+        "league/booboo": "dev-master",
         "laasti/application": "dev-develop"
     },
     "suggest": {

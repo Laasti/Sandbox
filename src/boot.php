@@ -5,19 +5,10 @@ define('BASEPATH', __DIR__);
 // include the Composer autoloader
 require BASEPATH.'/../vendor/autoload.php';
 
-$app = new Laasti\Application();
+Laasti\Application::loadEnvironment(BASEPATH.'/../');
 
-//Instantiate application services
-$stack = $app->getStack();
-$router = $app->getRouter();
-
-//Prepare middleware stack
-$stack->push('Laasti\Route\Middlewares\RouteMiddleware');
-$stack->push('Laasti\Route\Middlewares\ControllerMiddleware');
-
-//Setup routes
-$router->create('GET', '/', 'Laasti\\Controllers\\HelloWorld::output');
-$router->create('GET', '/hello/{name:word}', 'Laasti\\Controllers\\HelloWorld::hello');
+$config = require __DIR__.'/appconfig.php';
+$app = new Laasti\Application($config);
 
 //Start the application
 $app->run();
