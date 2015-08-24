@@ -1,6 +1,5 @@
 <IfModule mod_rewrite.c>
 
-DirectoryIndex index.php index.html
 RewriteEngine on
 
 RewriteCond $1 !^(index\.php)

@@ -2,12 +2,11 @@
 
 
 return [
-    'di' => [
-    ],
-    'providers' => [],
-    'middlewares' => [],
+    //'di' => [],
+    //'providers' => [],
+    //'middlewares' => [],
     'routes' => [
-        ['GET', '/', 'Laasti\\Controllers\\HelloWorld::output'],
-        ['GET', '/hello/{name:word}', 'Laasti\\Controllers\\HelloWorld::hello'],
+        ['GET', '/', 'Laasti\Dist\Controllers\HelloWorld::welcome'],
+        ['GET', '/hello/{name:word}', 'Laasti\Dist\Controllers\HelloWorld::hello'],
     ]
 ];
