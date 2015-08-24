@@ -1,5 +1,3 @@
-AddType text/x-component .htc
-
 <IfModule mod_rewrite.c>
 
 DirectoryIndex index.php index.html

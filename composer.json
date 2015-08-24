@@ -1,38 +1,20 @@
 {
-    "name": "vendor/laasti",
-    "description": "Description of project Laasti.",
-    "minimum-stability": "dev",
+    "name": "laasti/dist",
+    "description": "A Laasti Framework distribution project. Requires the minimum.",
+    "type": "project",
     "authors": [
         {
-            "name": "Sonia",
-            "email": "your@email.here"
-        }
-    ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Laasti/application"
+            "name": "Sonia Marquette",
+            "email": "contact@nebulousweb.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Laasti\\": "src/"
+            "Laasti\\Dist\\": "src/"
         }
     },
     "require": {
-        "monolog/monolog": "~1.13",
-        "league/flysystem": "~1.0",
-        "vlucas/spot2": "~2.1",
-        "gregwar/image": "2.*",
-         "vlucas/valitron": "~1.1",
-        "league/booboo": "dev-master",
-        "laasti/application": "dev-develop"
-    },
-    "suggest": {
-        "vlucas/spot2": "A nice ORM that let's you code."
-    },
-    "require-dev": {
-        "phpunit/phpunit": "4.5.*",
-        "squizlabs/php_codesniffer": "dev-master"
+        "laasti/application": "~1.0",
+         "vlucas/phpdotenv": "^2.0.1"
     }
 }
