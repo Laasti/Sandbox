@@ -9,8 +9,7 @@ require BASEPATH.'/../vendor/autoload.php';
 $dotenv = new Dotenv\Dotenv(BASEPATH.'/../');
 $dotenv->load();
 
-$config = require __DIR__.'/appconfig.php';
-$app = new Laasti\Application\Application($config);
+$app = new Laasti\Application\Application(require __DIR__.'/config.php');
 
 //Start the application
 $app->run();

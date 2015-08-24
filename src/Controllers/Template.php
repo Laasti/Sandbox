@@ -5,7 +5,7 @@ namespace Laasti\Dist\Controllers;
 use Laasti\Response\ResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class HelloWorld
+class Template
 {
 
     protected $responder;
@@ -15,8 +15,10 @@ class HelloWorld
         $this->responder = $responder;
     }
 
-    public function welcome(Request $request)
+    public function display(Request $request)
     {
-        return $this->responder->raw('<h1>Hello world!</h1>');
+        $this->responder->setData('title', 'Who am I?');
+        $this->responder->setData('name', $request->attributes->get('name'));
+        return $this->responder->view('my-name-is');
     }
 }

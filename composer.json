@@ -1,5 +1,5 @@
 {
-    "name": "laasti/dist",
+    "name": "laasti/sandbox",
     "description": "A Laasti Framework distribution project. Requires the minimum.",
     "type": "project",
     "authors": [
