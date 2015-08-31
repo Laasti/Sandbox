@@ -1,6 +1,6 @@
 {
     "name": "laasti/sandbox",
-    "description": "A Laasti Framework distribution project. Requires the minimum.",
+    "description": "A Laasti Framework distribution sample code project. Requires all supported packages.",
     "type": "project",
     "authors": [
         {
@@ -10,11 +10,22 @@
     ],
     "autoload": {
         "psr-4": {
-            "Laasti\\Dist\\": "src/"
+            "Laasti\\Sandbox\\": "src/"
         }
     },
     "require": {
         "laasti/application": "~1.0",
-         "vlucas/phpdotenv": "^2.0.1"
+        "vlucas/phpdotenv": "^2.0.1",
+        "laasti/lazydata": "^0.1",
+        "laasti/pagination": "^1.0",
+        "laasti/valitron-provider": "^1.0",
+        "laasti/spot-provider": "^1.0",
+        "laasti/mailer": "^2.0",
+        "laasti/flysystem-provider": "^1.0",
+        "laasti/gregwar-image-provider": "^1.0",
+        "laasti/symfony-session-provider": "^1.0",
+        "laasti/symfony-translation-provider": "^1.0",
+        "laasti/warden": "^0.1",
+        "ircmaxell/password-compat": "^1.0"
     }
 }

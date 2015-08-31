@@ -1,6 +1,6 @@
 <?php
 
-namespace Laasti\Dist\Controllers;
+namespace Laasti\Sandbox\Controllers;
 
 use Laasti\Response\ResponderInterface;
 use Symfony\Component\HttpFoundation\Request;

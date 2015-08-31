@@ -10,6 +10,7 @@ $dotenv = new Dotenv\Dotenv(BASEPATH.'/../');
 $dotenv->load();
 
 $app = new Laasti\Application\Application(require __DIR__.'/config.php');
-
+$app->inflector('League\Container\ContainerAwareTrait')
+          ->invokeMethod('setContainer', [$app]);
 //Start the application
 $app->run();

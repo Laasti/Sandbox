@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="<?php echo $lang; ?>">
     <head>
         <meta charset="utf-8">
         <title><?php $title; ?></title>
@@ -9,6 +9,3 @@
         </style>
     </head>
     <body>
-        <h1>Hello, my name is <?php echo $name; ?></h1>
-    </body>
-</html>
