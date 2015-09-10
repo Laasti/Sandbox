@@ -26,6 +26,7 @@
         "laasti/symfony-session-provider": "^1.0",
         "laasti/symfony-translation-provider": "^1.0",
         "laasti/warden": "^0.1",
+        "laasti/form": "^0.1",
         "ircmaxell/password-compat": "^1.0"
     }
 }
