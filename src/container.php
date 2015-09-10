@@ -14,7 +14,8 @@ return [
     'Laasti\Sandbox\Controllers\Form' => [
         'class' => 'Laasti\Sandbox\Controllers\Form',
         'arguments' => [
-            'Laasti\Response\ResponderInterface'
+            'Laasti\Response\ResponderInterface',
+            'Symfony\Component\HttpFoundation\Session\SessionInterface'
         ],
         'methods' => [
             'setContainer' => ['League\Container\ContainerInterface']

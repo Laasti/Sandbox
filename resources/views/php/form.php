@@ -1,4 +1,11 @@
 <?php include('includes/head.php'); ?>
+<?php if (!empty($success)): ?>
+<?php foreach ($success as $message): ?>
+<div class="success">
+    <?= $message; ?>
+</div>
+<?php endforeach; ?>
+<?php endif; ?>
 <form action="<?= $form->getAction(); ?>" method="<?= $form->getMethod(); ?>" <?= $form->getFormAttributes(); ?>>
 <?php foreach ($form->getFields() as $field): ?>
 <?php include('includes/form-row.php'); ?>
