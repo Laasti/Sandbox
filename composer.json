@@ -14,19 +14,18 @@
         }
     },
     "require": {
-        "laasti/application": "~1.0",
-        "vlucas/phpdotenv": "^2.0.1",
-        "laasti/lazydata": "^0.1",
-        "laasti/pagination": "^1.0",
-        "laasti/valitron-provider": "^1.0",
-        "laasti/spot-provider": "^1.0",
-        "laasti/mailer": "^2.0",
-        "laasti/flysystem-provider": "^1.0",
-        "laasti/gregwar-image-provider": "^1.0",
-        "laasti/symfony-session-provider": "^1.0",
-        "laasti/symfony-translation-provider": "^1.0",
+        "laasti/application": "dev-develop",
+        "laasti/peels": "dev-master#cc4f9c2",
+        "laasti/directions": "dev-master",
+        "league/container": "~2.0.3",
+        "league/booboo": "~1.0",
+        "monolog/monolog": "~1.0",
+        "zendframework/zend-diactoros": "~1.3.3",
+        "laasti/lazydata": "^0.5",
+        "laasti/pagination": "^0.2",
+        "laasti/mailer": "^2.0.4",
+        "hassankhan/config": "~0.10.0",
         "laasti/warden": "^0.1",
-        "laasti/form": "^0.1",
         "ircmaxell/password-compat": "^1.0"
     }
 }
