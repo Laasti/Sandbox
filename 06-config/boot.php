@@ -19,7 +19,8 @@ $container->share('Interop\Container\ContainerInterface', $container);
 //Can also be a folder
 $container->add('config_files', [__DIR__.'/config.php']);
 $container->addServiceProvider(new Laasti\Core\Providers\ConfigFilesProvider());
-$app = new Application($container, new HttpKernel(function($request, $response) {return $response;}));
+$container->add('kernel', new HttpKernel(function($request, $response) {return $response;}));
+$app = new Application($container);
 $app->run(ServerRequestFactory::fromGlobals(), new HtmlResponse('Nothing'));
 
 

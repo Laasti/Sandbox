@@ -17,7 +17,6 @@ require __DIR__.'/../vendor/autoload.php';
 $container = new Container;
 $container->share('Interop\Container\ContainerInterface', $container);
 $container->add('config', []);
-$container->addServiceProvider(new MonologProvider);
 $app = new Application($container);
 $app->setConfig('directions', [
     'default' => [
@@ -30,8 +29,6 @@ $app->setConfig('directions', [
         ]
     ]
 ]);
-$container->addServiceProvider('Laasti\Directions\Providers\LeagueDirectionsProvider');
-$container->addServiceProvider('Laasti\Peels\Providers\LeaguePeelsProvider');
 //And now middlewares
 $app->setConfig('peels', [
     'http' => [
@@ -53,6 +50,9 @@ $app->setConfig('peels', [
         ]
     ]
 ]);
+$container->addServiceProvider('Laasti\Directions\Providers\LeagueDirectionsProvider');
+$container->addServiceProvider('Laasti\Peels\Providers\LeaguePeelsProvider');
+$container->addServiceProvider(new MonologProvider);
 $router = $container->get('directions.default');
 
 //And more middlewares, they can be specific to a route
@@ -67,9 +67,10 @@ $router->add('GET', '/route-middleware', function($request, $response) {
     $response->getBody()->write("<br/>Second route middleware (after controller)");
     return $response;
 });
-            
 //By default, laasti/directions is used. A wrapper around nikic's FastRoute that provides additional features.
-$app->setKernel(new HttpKernel($container->get('peels.http')->create()));
+$container->add('kernel', function($peels) {
+    return new HttpKernel($peels);
+})->withArguments(['peels.http']);
 $app->run(ServerRequestFactory::fromGlobals(), new HtmlResponse(''));
 
 

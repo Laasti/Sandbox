@@ -15,7 +15,7 @@
     },
     "require": {
         "laasti/application": "dev-develop",
-        "laasti/peels": "dev-master#cc4f9c2",
+        "laasti/peels": "dev-master",
         "laasti/directions": "dev-master",
         "league/container": "~2.0.3",
         "league/booboo": "~1.0",

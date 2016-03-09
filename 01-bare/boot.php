@@ -21,15 +21,15 @@ $container->add('config', []);
 
 //Then, you need to prepare a kernel that will return a response to output to the browser
 //This kernel is the simplest possible, but you can use any callable that accepts a request and a response as arguments
-$kernel = new HttpKernel(function(RequestInterface $request, ResponseInterface $response) {
+$container->add('kernel', new HttpKernel(function(RequestInterface $request, ResponseInterface $response) {
     //Add the text to the response
     $response->getBody()->write('Hello world!');
     //Return the finale response to the kernel, the kernel will output the response
     return $response;
-});
+}));
 
 //Initialize application
-$app = new Application($container, $kernel);
+$app = new Application($container);
 
 //Finally run the application
 //The http application accepts any Http message Request and Response (PSR-7)

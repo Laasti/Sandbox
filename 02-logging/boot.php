@@ -42,6 +42,6 @@ $container->addServiceProvider(new \Laasti\Core\Providers\MonologProvider());
 //Warning: You have to define your config before add the service provider to ensure proper configuration
 $container->get('monolog.channels.debug')->debug('Hello world logged in your browser console.');
 
-$kernel = new HttpKernel(function(RequestInterface $request, ResponseInterface $response) {return $response;});
-$app = new Application($container, $kernel);
+$container->add('kernel', new HttpKernel(function(RequestInterface $request, ResponseInterface $response) {return $response;}));
+$app = new Application($container);
 $app->run(new Request, new HtmlResponse('Open up the browser console'));

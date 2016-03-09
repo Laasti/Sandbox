@@ -21,8 +21,8 @@ ini_set('display_errors', 1);
 //We'll skip the boot up explained in 01-bare folder
 $container = new Container;
 $container->add('config', []);
-$kernel = new HttpKernel(function(RequestInterface $request, ResponseInterface $response) {return $response;});
-$app = new Application($container, $kernel);
+$container->add('kernel', new HttpKernel(function(RequestInterface $request, ResponseInterface $response) {return $response;}));
+$app = new Application($container);
 $app->run(new Request, new HtmlResponse(''));
 
 //To handle errors, a key is reserved in the container: "error_handler"

@@ -16,7 +16,6 @@ require __DIR__.'/../vendor/autoload.php';
 //We'll skip the boot up explained in 01-bare folder
 $container = new Container;
 $container->add('config', []);
-$container->addServiceProvider(new MonologProvider);
 $app = new Application($container);
 
 //So how about routing?
@@ -37,9 +36,13 @@ $app->setConfig('directions', [
         ]
     ]
 ]);
-//By default, laasti/directions is used. A wrapper around nikic's FastRoute that provides additional features.
+
+$container->addServiceProvider(new MonologProvider);
 $container->addServiceProvider('Laasti\Directions\Providers\LeagueDirectionsProvider');
-$app->setKernel(new HttpKernel([$container->get('directions.default'), 'findAndDispatch']));
+//By default, laasti/directions is used. A wrapper around nikic's FastRoute that provides additional features.
+$container->add('kernel', function() use ($container) {
+    return new HttpKernel([$container->get('directions.default'), 'findAndDispatch']);
+});
 $app->run(ServerRequestFactory::fromGlobals(), new HtmlResponse(''));
 
 
